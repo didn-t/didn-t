@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <meta charset="utf8" />
+    <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+    <title>
+      
+        Djanngo项目部署到服务器 | didn
+      
+    </title>
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    
+      <link rel="apple-touch-icon"
+            sizes="180x180"
+            href="/images/apple-touch-icon.png" />
+    
+    
+      <link rel="icon"
+            type="image/png"
+            sizes="32x32"
+            href="/images/favicon-32x32.png" />
+    
+    
+      <link rel="icon"
+            type="image/png"
+            sizes="16x16"
+            href="/images/favicon-16x16.png" />
+    
+    
+      <link rel="mask-icon"
+            href="/images/logo.svg"
+            color="" />
+    
+    
+    
+      
+  <style>
+    @font-face {
+        font-family:sourceHanSerif;
+        src: url(/font/normal.ttf);
+        font-weight: normal;
+    }
+  </style>
+
+  <style>
+    @font-face {
+        font-family:sourceHanSerif;
+        src: url(/font/bold.ttf);
+        font-weight: bold;
+    }
+  </style>
+
+
+    
+    <link rel="stylesheet"
+          type="text/css"
+          href='/css/layout.css' />
+    
+    
+  <link rel="stylesheet" type="text/css" href="/css/post.css"/>
+  
+
+  <meta name="generator" content="Hexo 7.3.0"></head>
+  <body>
+    
+      <div id="search-mask" style="display:none">
+  <div class="search-main" id="search-main">
+    <div class="search__head">
+      <div class="search-form">
+        <svg t="1706347533072"
+             class="icon"
+             viewBox="0 0 1024 1024"
+             version="1.1"
+             xmlns="http://www.w3.org/2000/svg"
+             p-id="7828"
+             width="20"
+             height="20">
+          <path d="M685.6 660.336l155.152 155.168a16 16 0 0 1 0 22.624l-11.312 11.328a16 16 0 0 1-22.624 0l-158.528-158.544a289.792 289.792 0 0 1-165.152 51.36C322.336 742.256 192 611.904 192 451.12 192 290.336 322.336 160 483.136 160c160.784 0 291.12 130.336 291.12 291.136 0 82.112-33.984 156.272-88.672 209.2z m-202.464 33.92c134.272 0 243.12-108.848 243.12-243.12C726.256 316.848 617.408 208 483.136 208 348.848 208 240 316.848 240 451.136c0 134.272 108.848 243.12 243.136 243.12z" fill="#000000" p-id="7829">
+          </path>
+        </svg>
+        <input id="search-input" placeholder="搜索文章">
+        <svg t="1706361500528"
+             id="search-clear"
+             class="icon"
+             viewBox="0 0 1024 1024"
+             version="1.1"
+             xmlns="http://www.w3.org/2000/svg"
+             p-id="4351"
+             width="20"
+             height="20">
+          <path d="M512 562.688l-264.2944 264.2944-50.688-50.688L461.312 512 197.0176 247.7056l50.688-50.688L512 461.312l264.2944-264.2944 50.688 50.688L562.688 512l264.2944 264.2944-50.688 50.688L512 562.688z" fill="#00" p-id="4352">
+          </path>
+        </svg>
+      </div>
+    </div>
+    <div class="search__body" id="search-result"></div>
+    <div class="search__foot"></div>
+  </div>
+</div>
+
+    
+    
+    <div class=head>
+      <div class="nav">
+        <a href='/' class="nav-logo">
+          <img alt="logo" height="60px" width="60px" src="/images/logo.svg" />
+        </a>
+        <input id="navBtn" type="checkbox" />
+        <div class="nav-right">
+          
+            <div class="search-outer">
+  <div class="search" id="search-btn">
+    <svg t="1706347533072"
+         class="icon"
+         viewBox="0 0 1024 1024"
+         version="1.1"
+         xmlns="http://www.w3.org/2000/svg"
+         p-id="7828"
+         width="20"
+         height="20">
+      <path d="M685.6 660.336l155.152 155.168a16 16 0 0 1 0 22.624l-11.312 11.328a16 16 0 0 1-22.624 0l-158.528-158.544a289.792 289.792 0 0 1-165.152 51.36C322.336 742.256 192 611.904 192 451.12 192 290.336 322.336 160 483.136 160c160.784 0 291.12 130.336 291.12 291.136 0 82.112-33.984 156.272-88.672 209.2z m-202.464 33.92c134.272 0 243.12-108.848 243.12-243.12C726.256 316.848 617.408 208 483.136 208 348.848 208 240 316.848 240 451.136c0 134.272 108.848 243.12 243.136 243.12z" fill="#000000" p-id="7829">
+      </path>
+    </svg>
+    <span>搜索</span>
+    <span class="search-shortcut-key">Ctrl K</span>
+  </div>
+</div>
+
+          
+          <div class="nav-menu">
+            
+              
+                <a class="nav-menu-item" href="/code">代码</a>
+              
+                <a class="nav-menu-item" href="/alban">图库</a>
+              
+            
+            
+          </div>
+        </div>
+        <label class="nav-btn" for="navBtn"></label>
+      </div>
+    </div>
+    <div class="body">
+      
+  <article class="post-content">
+    <div class="post-inner">
+      <div class="post-content__head">
+        <div class="post-title">Djanngo项目部署到服务器</div>
+        <div class="post-info">
+          
+  <a href="/tags/%E5%BC%80%E5%8F%91/" class="post-tag">#开发</a>
+
+
+          <span class="post-date">2025-06-07</span>
+        </div>
+      </div>
+      
+      <div class="post-content__body">
+        
+          <div class="post-gallery">
+            
+          </div>
+        
+        <h2 id="djanngo项目部署到服务器">Djanngo项目部署到服务器</h2>
+<h3 id="virtualenv虚拟机">virtualenv虚拟机</h3>
+<p>安装命令</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> apt install python3-virtualenv</span><br></pre></td></tr></table></figure>
+<p>创建虚拟机</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">virtualenv env</span><br></pre></td></tr></table></figure>
+<p><strong>注</strong>：env是虚拟机名</p>
+<p>启动虚拟机</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source env/bin/activate</span><br></pre></td></tr></table></figure>
+<p>安装需要python包，如Django</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install django</span><br></pre></td></tr></table></figure>
+<h3 id="运行python项目">运行python项目</h3>
+<p>使用git把包传进服务器</p>
+<p>进入项目目录启动django</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python manage.py runserver</span><br></pre></td></tr></table></figure>
+<p>或</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python manage.py runserver 0.0.0.0:8000</span><br></pre></td></tr></table></figure>
+<p>把静态文件放到指定目录</p>
+<p>如 /home/static</p>
+<p><strong>注</strong>：不建议放root目录下，可能没权限访问</p>
+<p>项目setting.py里设置</p>
+<figure class="highlight django"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="language-xml">STATIC_URL = &#x27;/static/&#x27;</span></span><br><span class="line"><span class="language-xml"></span></span><br><span class="line"><span class="language-xml">STATICFILES_DIRS = [os.path.join(BASE_DIR, &#x27;static&#x27;),]</span></span><br><span class="line"><span class="language-xml">STATIC_ROOT = &#x27;/home/static/&#x27;</span></span><br></pre></td></tr></table></figure>
+<p>然后收集静态资源文件</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python manage.py collectstatic</span><br></pre></td></tr></table></figure>
+<h3 id="安装和配置nginx">安装和配置nginx</h3>
+<p>安装命令</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install nginx</span><br></pre></td></tr></table></figure>
+<p>nginx目录/etc/nginx</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd /etc/nginx</span><br></pre></td></tr></table></figure>
+<p>进入sites-enabled目录</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd /etc/nginx/sites-enabled</span><br></pre></td></tr></table></figure>
+<p>里面的default文件</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">##</span></span><br><span class="line"><span class="comment"># You should look at the following URL&#x27;s in order to grasp a solid understanding</span></span><br><span class="line"><span class="comment"># of Nginx configuration files in order to fully unleash the power of Nginx.</span></span><br><span class="line"><span class="comment"># https://www.nginx.com/resources/wiki/start/</span></span><br><span class="line"><span class="comment"># https://www.nginx.com/resources/wiki/start/topics/tutorials/config_pitfalls/</span></span><br><span class="line"><span class="comment"># https://wiki.debian.org/Nginx/DirectoryStructure</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># In most cases, administrators will remove this file from sites-enabled/ and</span></span><br><span class="line"><span class="comment"># leave it as reference inside of sites-available where it will continue to be</span></span><br><span class="line"><span class="comment"># updated by the nginx packaging team.</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># This file will automatically load configuration files provided by other</span></span><br><span class="line"><span class="comment"># applications, such as Drupal or Wordpress. These applications will be made</span></span><br><span class="line"><span class="comment"># available underneath a path with that package name, such as /drupal8.</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># Please see /usr/share/doc/nginx-doc/examples/ for more detailed examples.</span></span><br><span class="line"><span class="comment">##</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Default server configuration</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="section">server</span> &#123;</span><br><span class="line">        <span class="attribute">listen</span> <span class="number">80</span> default_server;</span><br><span class="line">        <span class="attribute">listen</span> [::]:<span class="number">80</span> default_server;</span><br><span class="line"></span><br><span class="line">        <span class="comment"># SSL configuration</span></span><br><span class="line">        <span class="comment">#</span></span><br><span class="line">        <span class="comment"># listen 443 ssl default_server;</span></span><br><span class="line">        <span class="comment"># listen [::]:443 ssl default_server;</span></span><br><span class="line">        <span class="comment">#</span></span><br><span class="line">        <span class="comment"># Note: You should disable gzip for SSL traffic.</span></span><br><span class="line">        <span class="comment"># See: https://bugs.debian.org/773332</span></span><br><span class="line">        <span class="comment">#</span></span><br><span class="line">        <span class="comment"># Read up on ssl_ciphers to ensure a secure configuration.</span></span><br><span class="line">        <span class="comment"># See: https://bugs.debian.org/765782</span></span><br><span class="line">        <span class="comment">#</span></span><br><span class="line">        <span class="comment"># Self signed certs generated by the ssl-cert package</span></span><br><span class="line">        <span class="comment"># Don&#x27;t use them in a production server!</span></span><br><span class="line">        <span class="comment">#</span></span><br><span class="line">        <span class="comment"># include snippets/snakeoil.conf;</span></span><br><span class="line"></span><br><span class="line">        <span class="attribute">root</span> /var/www/html;</span><br><span class="line"></span><br><span class="line">        <span class="comment"># Add index.php to the list if you are using PHP</span></span><br><span class="line">        <span class="attribute">index</span> index.html index.htm index.nginx-debian.html;</span><br><span class="line"></span><br><span class="line">        <span class="attribute">server_name</span> _;</span><br><span class="line"></span><br><span class="line">        <span class="section">location</span> / &#123;</span><br><span class="line">                <span class="comment"># First attempt to serve request as file, then</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>不管它，直接删除</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rm default</span><br></pre></td></tr></table></figure>
+<p>新建一个配置文件</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim cf.conf</span><br></pre></td></tr></table></figure>
+<p>添加到文件里 <figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">server</span> &#123;</span><br><span class="line">    <span class="attribute">server_name</span> www.com; <span class="comment">#这里改为你的域名</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 新添加的静态文件处理块</span></span><br><span class="line">    <span class="section">location</span> /static/ &#123;</span><br><span class="line">        <span class="attribute">alias</span> /home/static/;  <span class="comment"># 替换为您的STATIC_ROOT路径</span></span><br><span class="line">        <span class="attribute">expires</span> <span class="number">30d</span>;</span><br><span class="line">        <span class="attribute">access_log</span> <span class="literal">on</span>;</span><br><span class="line">        <span class="attribute">add_header</span> Cache-Control <span class="string">&quot;public&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="section">location</span> / &#123;</span><br><span class="line">        <span class="attribute">include</span> proxy_params;</span><br><span class="line">        <span class="attribute">proxy_pass</span> http://127.0.0.1:8000;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure></p>
+<p>保存好文件</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo nginx -t</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">检查nginx配置语法，成功有successful字样</span></span><br></pre></td></tr></table></figure>
+<p>重载nginx</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl reload nginx</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">或者</span></span><br><span class="line">sudo nginx -s reload</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">sudo systemctl start nginx # 启动nginx</span><br><span class="line">sudo systemctl stop nginx # 关闭nginx</span><br></pre></td></tr></table></figure>
+<p>开启80和443端口</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">sudo ufw allow 80/tcp</span><br><span class="line">sudo ufw allow 443/tcp</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">查看防火墙状态</span></span><br><span class="line">sudo ufw status</span><br></pre></td></tr></table></figure>
+<h2 id="安装ssl证书并启用https">安装SSL证书并启用HTTPS</h2>
+<h3 id="安装certbot和nginx插件">1. 安装Certbot和Nginx插件</h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install certbot python3-certbot-nginx</span><br></pre></td></tr></table></figure>
+<h3 id="获取ssl证书">2. 获取SSL证书</h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo certbot --nginx -d yourdomain.com -d www.yourdomain.com</span><br></pre></td></tr></table></figure>
+<p>(将yourdomain.com替换为你的实际域名)</p>
+<h3 id="自动续期测试">3. 自动续期测试</h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo certbot renew --dry-run</span><br></pre></td></tr></table></figure>
+<h3 id="修改nginx配置自动重定向http到https">4. 修改Nginx配置自动重定向HTTP到HTTPS</h3>
+<p>在之前的nginx配置中添加：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">    listen 80;</span><br><span class="line">    server_name yourdomain.com www.yourdomain.com;</span><br><span class="line">    return 301 https://$host$request_uri;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="重启nginx使配置生效">5. 重启Nginx使配置生效</h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl restart nginx</span><br></pre></td></tr></table></figure>
+<p>这样就完成了HTTPS的配置，Certbot会自动处理证书续期问题。</p>
+<p>注意：在执行这些命令前，请确保：</p>
+<ol style="list-style-type: decimal">
+<li>域名已解析到服务器IP</li>
+<li>80和443端口已开放</li>
+<li>Nginx配置中的server_name与域名一致</li>
+</ol>
+
+      </div>
+    </div>
+    
+      <script src='https://unpkg.com/mermaid@latest/dist/mermaid.min.js'></script>
+      <script>
+        if (window.mermaid) {
+          mermaid.initialize({"startOnload":true});
+        }
+      </script>
+    
+  </article>
+  <div class="post__foot">
+    
+    <div class="post-nav">
+  
+    <a class="post-nav-item-left" href="/2025/06/07/debian%E5%AE%89%E8%A3%85docker/">
+      <div class="text-align">
+        <svg t="1670570876164"
+             class="icon"
+             viewBox="0 0 1024 1024"
+             width="16"
+             height="16">
+          <path d="M384 512L731.733333 202.666667c17.066667-14.933333 19.2-42.666667 4.266667-59.733334-14.933333-17.066667-42.666667-19.2-59.733333-4.266666l-384 341.333333c-10.666667 8.533333-14.933333 19.2-14.933334 32s4.266667 23.466667 14.933334 32l384 341.333333c8.533333 6.4 19.2 10.666667 27.733333 10.666667 12.8 0 23.466667-4.266667 32-14.933333 14.933333-17.066667 14.933333-44.8-4.266667-59.733334L384 512z" p-id="14596" />
+        </svg>
+        <span class="text-small">上一篇</span>
+      </div>
+      <div>Debian安装Docker</div>
+    </a>
+  
+  <div class="vhr"></div>
+  
+    <a class="post-nav-item-right" href="/2025/06/07/http/">
+      <div class="text-align">
+        <span class="text-small">下一篇</span>
+        <svg t="1670570876164"
+             class="icon"
+             viewBox="0 0 1024 1024"
+             transform="scale(-1,-1)"
+             width="16"
+             height="16">
+          <path d="M384 512L731.733333 202.666667c17.066667-14.933333 19.2-42.666667 4.266667-59.733334-14.933333-17.066667-42.666667-19.2-59.733333-4.266666l-384 341.333333c-10.666667 8.533333-14.933333 19.2-14.933334 32s4.266667 23.466667 14.933334 32l384 341.333333c8.533333 6.4 19.2 10.666667 27.733333 10.666667 12.8 0 23.466667-4.266667 32-14.933333 14.933333-17.066667 14.933333-44.8-4.266667-59.733334L384 512z" p-id="14596" />
+        </svg>
+      </div>
+      http协议
+    </a>
+  
+</div>
+
+    
+      <div class="related-post">
+  <div class="related__head">
+  <a href="/tags/%E5%BC%80%E5%8F%91/" class="post-tag">#开发</a>
+
+</div>
+  <div class="realated__body">
+    
+      <div class="null"><div class="null-item"><div class="null-title"><a href="\2024\11\30\stack\" title="栈——顺序栈" rel="bookmark">栈——顺序栈</a></div></div><div class="null-item"><div class="null-title"><a href="\2025\06\07\http\" title="http协议" rel="bookmark">http协议</a></div></div></div>
+    
+  </div>
+</div>
+
+    
+    
+  </div>
+
+    </div>
+    <div class="foot">
+  <div class="foot-inner">
+    <div class="foot__head">
+      
+        <div class="foot-line">
+          <div class="matts">志</div><div class="matts">合</div><div class="matts">者</div>
+        </div>
+      
+        <div class="foot-line">
+          <div class="matts">不</div><div class="matts">以</div><div class="matts">山</div><div class="matts">海</div><div class="matts">为</div><div class="matts">远</div>
+        </div>
+      
+    </div>
+    <div class="foot__body">
+      
+        <div class="foot-item">
+          <div class="foot-item__head">友链</div>
+          <div class="foot-item__body">
+            
+            
+
+
+  
+  
+    <div class="foot-link-group">
+      
+        
+        
+          <div class="text">
+            <img alt="link"
+                 height="20px"
+                 width="20px"
+                 src="https://q.qlogo.cn/headimg_dl?dst_uin=2084069833&spec=640&img_type=jpg" />
+            <a class="foot-link" target="_blank" rel="noopener" href="https://blogs.changbaiqi.top">长白崎の个人博客</a>
+          </div>
+        
+      
+        
+        
+          <div class="text">
+            <img alt="link"
+                 height="20px"
+                 width="20px"
+                 src="https://yanranyy.github.io/img/yanranyy.jpg" />
+            <a class="foot-link" target="_blank" rel="noopener" href="https://yanranyy.github.io">嫣然云雨的个人博客</a>
+          </div>
+        
+      
+        
+        
+          <div class="text">
+            <img alt="link"
+                 height="20px"
+                 width="20px"
+                 src="/images/icon/icon-link+.svg" />
+            <a class="foot-link" href="mailto:didn-t@outlook.com?subject=申请http://didn.top的友链">申请友链</a>
+          </div>
+        
+      
+        
+        
+      
+    </div>
+  
+
+
+          </div>
+        </div>
+      
+      
+        <div class="foot-item">
+          <div class="foot-item__head">支持</div>
+          <div class="foot-item__body">
+            
+
+
+  
+  
+    <div class="foot-link-group">
+      
+        
+        
+          <div class="text">
+            <img alt="link"
+                 height="20px"
+                 width="20px"
+                 src="/images/icon/icon-link.svg" />
+            <a class="foot-link" target="_blank" rel="noopener" href="https://github.com/hooozen/hexo-theme-tranquility">Theme Tranquility</a>
+          </div>
+        
+      
+        
+        
+          <div class="text">
+            <img alt="link"
+                 height="20px"
+                 width="20px"
+                 src="/images/icon/icon-link.svg" />
+            <a class="foot-link" target="_blank" rel="noopener" href="https://hozen.site">浩然的主页</a>
+          </div>
+        
+      
+        
+        
+      
+        
+        
+      
+    </div>
+  
+
+
+          </div>
+        </div>
+      
+      <div class="foot-item">
+        <div class="foot-item__head">作者</div>
+        <div class="foot-item__body">
+          
+
+
+  
+  
+    <div class="foot-link-group">
+      
+        
+        
+          <div class="text">
+            <img alt="link"
+                 height="20px"
+                 width="20px"
+                 src="/images/logo-github.svg" />
+            <a class="foot-link" target="_blank" rel="noopener" href="https://github.com/didn-t">didn</a>
+          </div>
+        
+      
+        
+        
+          <div class="text">
+            <img alt="link"
+                 height="20px"
+                 width="20px"
+                 src="/images/icon/icon-email.svg" />
+            <a class="foot-link" href="mailto:kydsz@qq.com">didn-t@outlook.com</a>
+          </div>
+        
+      
+        
+        
+      
+        
+        
+      
+    </div>
+  
+
+
+        </div>
+      </div>
+    </div>
+   <div class="copyright">
+  <a href="http://didn.top">didn</a> &nbsp;|&nbsp;由&nbsp;<a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>&nbsp;及&nbsp;
+  <svg width="20" height="20" viewBox="0 0 725 725">
+    <path fill-rule="evenodd" fill="rgb(221, 221, 221)" d="M145.870,236.632 L396.955,103.578 L431.292,419.44 L156.600,522.53 L145.870,236.632 Z" />
+    <path fill-rule="evenodd" fill="rgb(159, 159, 159)" d="M396.955,103.578 L564.345,234.486 L611.558,513.469 L431.292,419.44 L396.955,103.578 Z" />
+    <path fill-rule="evenodd" fill="rgb(0, 0, 0)" d="M431.292,419.44 L611.558,513.469 L358.327,595.18 L156.600,522.53 L431.292,419.44 Z" />
+  </svg>
+  <a target="_blank" rel="noopener" href="https://github.com/hooozen/hexo-theme-tranquility">致远</a>&nbsp;驱动
+</div>
+
+
+<div class="beian">
+  
+  码农光影 &nbsp;
+  <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener">桂ICP备2025056390号</a>
+  
+  
+  
+</div>
+
+  </div>
+</div>
+
+    
+      <script src="https://unpkg.com/js-polyfills@0.1.43/es6.js"></script>
+      <script id="MathJax-script"
+              async
+              src="https://www.unpkg.com/mathjax@3.2.2/es5/tex-mml-chtml.js"></script>
+    
+    
+      <script src="/js/search.js"></script>
+      <script>searchInitialize("/search.json")</script>
+    
+    <script src="/js/copy-code.js"></script>
+    
+  
+
+  </body>
+</html>
